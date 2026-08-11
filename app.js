@@ -207,13 +207,17 @@ function showSection(id) {
   if (nav) nav.classList.add("active");
   // close sidebar on mobile
   if (window.innerWidth <= 700) {
-    document.getElementById("sidebar").classList.remove("open");
+    const sb = document.getElementById("sidebar");
+    if (sb) sb.classList.remove("open");
   }
 }
+window.showSection = showSection;
 
 function toggleSidebar() {
-  document.getElementById("sidebar").classList.toggle("open");
+  const sb = document.getElementById("sidebar");
+  if (sb) sb.classList.toggle("open");
 }
+window.toggleSidebar = toggleSidebar;
 
 // ========= INSTITUTIONS =========
 function renderInstitutions(list) {
@@ -664,7 +668,17 @@ function setRating(n) {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+window.filterInstitutions = filterInstitutions;
+window.openModal = openModal;
+window.closeModal = closeModal;
+window.filterConselheiros = filterConselheiros;
+window.setRating = setRating;
+window.submitConselheiro = submitConselheiro;
+window.resetForm = resetForm;
+window.toggleReplies = toggleReplies;
+window.submitReply = submitReply;
+
+function initApp() {
   renderInstitutions(institutions);
   renderComissao();
   renderFeedback();
@@ -681,7 +695,13 @@ document.addEventListener("DOMContentLoaded", () => {
       stars.forEach((st, j) => st.classList.toggle("active", j < currentRating));
     });
   });
-});
+}
+
+if (document.readyState === "complete" || document.readyState === "interactive") {
+  setTimeout(initApp, 1);
+} else {
+  document.addEventListener("DOMContentLoaded", initApp);
+}
 
 async function submitConselheiro(e) {
   e.preventDefault();
