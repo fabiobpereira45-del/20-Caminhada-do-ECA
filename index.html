@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>20ª Caminhada do ECA 2026 — Conselho Tutelar de Salvador</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-logo-wrap">
+      <img src="logo.jpg" alt="Logo Conselho Tutelar" class="brand-logo-img" onerror="this.style.display='none'" />
+    </div>
+    <div class="brand-text">
+      <span class="brand-title">Conselho Tutelar</span>
+      <span class="brand-sub">Salvador — BA</span>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Painel</div>
+    <button class="nav-item active" id="nav-geral" onclick="showSection('geral')">
+      <span class="nav-icon">📊</span><span>Visão Geral</span>
+    </button>
+    <button class="nav-item" id="nav-instituicoes" onclick="showSection('instituicoes')">
+      <span class="nav-icon">🏫</span><span>Instituições</span>
+    </button>
+    <button class="nav-item" id="nav-comissao" onclick="showSection('comissao')">
+      <span class="nav-icon">👥</span><span>Comissão Organizadora</span>
+    </button>
+    <button class="nav-item" id="nav-devolutiva" onclick="showSection('devolutiva')">
+      <span class="nav-icon">📋</span><span>Prestação de Contas</span>
+    </button>
+    <button class="nav-item" id="nav-feedback" onclick="showSection('feedback')">
+      <span class="nav-icon">💬</span><span>Avaliações & Sugestões</span>
+    </button>
+    <button class="nav-item" id="nav-conselheiros" onclick="showSection('conselheiros')">
+      <span class="nav-icon">🗣️</span><span>Voz dos Conselheiros</span>
+    </button>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="event-badge">
+      <span class="badge-icon">🏃</span>
+      <div><strong>20ª Caminhada do ECA</strong><small>13 de julho de 2026</small></div>
+    </div>
+  </div>
+</aside>
+<button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleSidebar()">☰</button>
+<main class="main-content">
+  <header class="top-header">
+    <div class="header-inner">
+      <div class="header-title-group">
+        <h1 class="header-title">20ª Caminhada do ECA</h1>
+        <span class="header-subtitle">Painel de Resultados · Salvador, Bahia · 13 de julho de 2026</span>
+      </div>
+      <div class="header-meta">
+        <div class="meta-chip"><span>📍</span><span>Campo Grande → Castro Alves</span></div>
+        <div class="meta-chip meta-chip--blue"><span>🛑</span><span>Diga NÃO ao Bullying!</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECAO GERAL -->
+  <section id="section-geral" class="content-section active">
+    <div class="section-hero">
+      <div class="hero-content">
+        <div class="hero-badge">✨ Resultados Oficiais</div>
+        <h2 class="hero-title">Visão Geral do Evento</h2>
+        <p class="hero-desc">Resumo dos dados coletados junto às 11 instituições participantes.</p>
+      </div>
+      <div class="hero-icon-wrap"><div class="hero-circle"><span style="font-size:3.5rem">🏃‍♀️</span></div></div>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi-card kpi-green">
+        <div class="kpi-icon">👥</div>
+        <div class="kpi-value">~1.500</div>
+        <div class="kpi-label">Público Estimado Total</div>
+        <div class="kpi-sublabel">~568 nas 11 inst. pesquisadas</div>
+      </div>
+      <div class="kpi-card kpi-blue">
+        <div class="kpi-icon">🏫</div>
+        <div class="kpi-value counter" data-target="11">0</div>
+        <div class="kpi-label">Instituições Pesquisadas</div>
+        <div class="kpi-sublabel">Escolas & Organizações</div>
+      </div>
+      <div class="kpi-card kpi-purple">
+        <div class="kpi-icon">💰</div>
+        <div class="kpi-value">R$ 1.000</div>
+        <div class="kpi-label">Valor Disponível</div>
+        <div class="kpi-sublabel">Recurso em Espécie</div>
+      </div>
+      <div class="kpi-card kpi-orange">
+        <div class="kpi-icon">💸</div>
+        <div class="kpi-value">R$ 714</div>
+        <div class="kpi-label">Valor Gasto</div>
+        <div class="kpi-sublabel">Vans (R$300) + Mídia + Mat.</div>
+      </div>
+      <div class="kpi-card kpi-teal">
+        <div class="kpi-icon">✅</div>
+        <div class="kpi-value" style="color:var(--green)">R$ 286</div>
+        <div class="kpi-label">Saldo Restante</div>
+        <div class="kpi-sublabel">Reinvestido em Crachás/Coletes</div>
+      </div>
+      <div class="kpi-card kpi-cyan">
+        <div class="kpi-icon">📦</div>
+        <div class="kpi-value">200 kits</div>
+        <div class="kpi-label">Sobras de Lanche (SPMJ)</div>
+        <div class="kpi-sublabel">Sobra pós-caminhada</div>
+      </div>
+    </div>
+    <div class="charts-row">
+      <div class="chart-card">
+        <h3 class="chart-title">Novos vs. Experientes</h3>
+        <p class="chart-sub">1ª participação na Caminhada do ECA</p>
+        <div class="donut-wrap">
+          <svg viewBox="0 0 200 200" class="donut-svg">
+            <circle cx="100" cy="100" r="70" fill="none" stroke="#e8edf5" stroke-width="28"/>
+            <circle cx="100" cy="100" r="70" fill="none" stroke="url(#dg1)" stroke-width="28" stroke-dasharray="330 110" stroke-dashoffset="87.5" stroke-linecap="round" class="donut-anim"/>
+            <circle cx="100" cy="100" r="70" fill="none" stroke="url(#dg2)" stroke-width="28" stroke-dasharray="110 330" stroke-dashoffset="-242.5" stroke-linecap="round" class="donut-anim"/>
+            <defs>
+              <linearGradient id="dg1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#4facfe"/><stop offset="100%" stop-color="#00f2fe"/></linearGradient>
+              <linearGradient id="dg2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#fa709a"/><stop offset="100%" stop-color="#fee140"/></linearGradient>
+            </defs>
+            <text x="100" y="96" text-anchor="middle" font-size="22" font-weight="800" fill="#1a2b45">75%</text>
+            <text x="100" y="116" text-anchor="middle" font-size="11" fill="#6b7a99">Novos</text>
+          </svg>
+          <div class="donut-legend">
+            <div class="legend-item"><span class="legend-dot" style="background:linear-gradient(90deg,#4facfe,#00f2fe)"></span><span>1ª vez — <strong>75%</strong> (8 inst.)</span></div>
+            <div class="legend-item"><span class="legend-dot" style="background:linear-gradient(90deg,#fa709a,#fee140)"></span><span>Experientes — <strong>25%</strong> (3 inst.)</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3 class="chart-title">Avaliação da Recepção</h3>
+        <p class="chart-sub">Como as instituições avaliaram o acolhimento</p>
+        <div class="bar-chart">
+          <div class="bar-item"><span class="bar-label">Satisfatório</span><div class="bar-track"><div class="bar-fill bar-fill--blue" style="--w:91%"><span>91%</span></div></div></div>
+          <div class="bar-item"><span class="bar-label">Boa</span><div class="bar-track"><div class="bar-fill bar-fill--green" style="--w:9%"><span>9%</span></div></div></div>
+          <div class="bar-item"><span class="bar-label">Regular</span><div class="bar-track"><div class="bar-fill bar-fill--orange" style="--w:1%"><span>0%</span></div></div></div>
+          <div class="bar-item"><span class="bar-label">Precisa Melhorar</span><div class="bar-track"><div class="bar-fill bar-fill--red" style="--w:1%"><span>0%</span></div></div></div>
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3 class="chart-title">Interesse em 2027</h3>
+        <p class="chart-sub">Confirmaram presença para o próximo ano</p>
+        <div class="radial-grid">
+          <div class="radial-item radial-green"><div class="radial-val">100%</div><div class="radial-lbl">✅ Sim</div></div>
+          <div class="radial-item radial-orange"><div class="radial-val">0%</div><div class="radial-lbl">❌ Não</div></div>
+          <div class="radial-item radial-blue"><div class="radial-val">0%</div><div class="radial-lbl">🤔 Talvez</div></div>
+        </div>
+        <p class="chart-footnote">🎉 Todas as 11 instituições desejam retornar em 2027!</p>
+      </div>
+    </div>
+    <div class="charts-row charts-row--2col">
+      <div class="chart-card">
+        <h3 class="chart-title">Itens Distribuídos</h3>
+        <p class="chart-sub">Suficiência dos itens ao longo do evento</p>
+        <div class="satisfaction-grid">
+          <div class="sat-item"><div class="sat-header"><span class="sat-icon">🥪</span><span class="sat-label">Lanche suficiente</span></div><div class="sat-bar-wrap"><div class="sat-bar"><div class="sat-fill" style="width:100%;background:linear-gradient(90deg,#43e97b,#38f9d7)"></div></div><span class="sat-pct">100% Sim</span></div></div>
+          <div class="sat-item"><div class="sat-header"><span class="sat-icon">💧</span><span class="sat-label">Água suficiente</span></div><div class="sat-bar-wrap"><div class="sat-bar"><div class="sat-fill" style="width:100%;background:linear-gradient(90deg,#4facfe,#00f2fe)"></div></div><span class="sat-pct">100% Sim</span></div></div>
+          <div class="sat-item"><div class="sat-header"><span class="sat-icon">🧴</span><span class="sat-label">Protetor + material</span></div><div class="sat-bar-wrap"><div class="sat-bar"><div class="sat-fill" style="width:100%;background:linear-gradient(90deg,#a18cd1,#fbc2eb)"></div></div><span class="sat-pct">100% Ambos</span></div></div>
+          <div class="sat-item"><div class="sat-header"><span class="sat-icon">🚌</span><span class="sat-label">Veículo suficiente</span></div><div class="sat-bar-wrap"><div class="sat-bar"><div class="sat-fill" style="width:100%;background:linear-gradient(90deg,#f093fb,#f5576c)"></div></div><span class="sat-pct">100% Sim</span></div></div>
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3 class="chart-title">Participantes por Instituição</h3>
+        <p class="chart-sub">Total de alunos e equipe declarados</p>
+        <div class="horiz-bars">
+          <div class="hbar-item"><span class="hbar-name">Laura Sales de Almeida</span><div class="hbar-track"><div class="hbar-fill" style="--w:100%;background:linear-gradient(90deg,#1e88e5,#42a5f5)">120</div></div></div>
+          <div class="hbar-item"><span class="hbar-name">Escola Passos do Saber</span><div class="hbar-track"><div class="hbar-fill" style="--w:56%;background:linear-gradient(90deg,#43e97b,#38f9d7)">67</div></div></div>
+          <div class="hbar-item"><span class="hbar-name">Col. Vicente Pacheco</span><div class="hbar-track"><div class="hbar-fill" style="--w:46%;background:linear-gradient(90deg,#fa709a,#fee140)">55</div></div></div>
+          <div class="hbar-item"><span class="hbar-name">Escola Helena Magalhães</span><div class="hbar-track"><div class="hbar-fill" style="--w:46%;background:linear-gradient(90deg,#a18cd1,#fbc2eb)">55</div></div></div>
+          <div class="hbar-item"><span class="hbar-name">CSU de Pernambués</span><div class="hbar-track"><div class="hbar-fill" style="--w:41%;background:linear-gradient(90deg,#f093fb,#f5576c)">49</div></div></div>
+          <div class="hbar-item"><span class="hbar-name">Prof. Bernardino Moreira</span><div class="hbar-track"><div class="hbar-fill" style="--w:42%;background:linear-gradient(90deg,#56ab2f,#a8e063)">50</div></div></div>
+          <div class="hbar-item"><span class="hbar-name">Creche Vila Verde</span><div class="hbar-track"><div class="hbar-fill" style="--w:38%;background:linear-gradient(90deg,#4facfe,#00f2fe)">45</div></div></div>
+          <div class="hbar-item"><span class="hbar-name">Criança Esperança</span><div class="hbar-track"><div class="hbar-fill" style="--w:33%;background:linear-gradient(90deg,#FEAC5E,#C779D0)">40</div></div></div>
+          <div class="hbar-item"><span class="hbar-name">Cosme de Farias</span><div class="hbar-track"><div class="hbar-fill" style="--w:33%;background:linear-gradient(90deg,#fd746c,#ff9068)">40</div></div></div>
+          <div class="hbar-item"><span class="hbar-name">Esperança de Viver</span><div class="hbar-track"><div class="hbar-fill" style="--w:23%;background:linear-gradient(90deg,#667eea,#764ba2)">27</div></div></div>
+          <div class="hbar-item"><span class="hbar-name">Casa da Amizade</span><div class="hbar-track"><div class="hbar-fill" style="--w:17%;background:linear-gradient(90deg,#f7971e,#ffd200)">20</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="materials-section">
+      <h3 class="section-subheading">📦 Sobras de Materiais (SPMJ)</h3>
+      <p class="section-subdesc">Recursos e materiais remanescentes da SPMJ após a realização da Caminhada. Conforme deliberação, serão sorteados em assembleia ou destinados às ações da Semana da Criança.</p>
+      <div class="materials-grid">
+        <div class="material-card"><div class="material-icon">💧</div><div class="material-qty">19</div><div class="material-name">Caixas de Água</div></div>
+        <div class="material-card"><div class="material-icon">🥪</div><div class="material-qty">200</div><div class="material-name">Kits de Lanche</div><div class="material-val">Val.: 11/2026</div></div>
+        <div class="material-card"><div class="material-icon">🎧</div><div class="material-qty">150</div><div class="material-name">Protetores Auriculares</div></div>
+        <div class="material-card"><div class="material-icon">👕</div><div class="material-qty">07</div><div class="material-name">Camisas Parceiros</div></div>
+        <div class="material-card"><div class="material-icon">🍭</div><div class="material-qty">05</div><div class="material-name">Pcts. de Pirulitos</div></div>
+        <div class="material-card"><div class="material-icon">📿</div><div class="material-qty">400</div><div class="material-name">Pulseiras ID</div></div>
+        <div class="material-card"><div class="material-icon">🖼️</div><div class="material-qty">09</div><div class="material-name">Banners</div></div>
+        <div class="material-card"><div class="material-icon">🎌</div><div class="material-qty">03</div><div class="material-name">Faixas</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECAO INSTITUICOES -->
+  <section id="section-instituicoes" class="content-section">
+    <div class="section-intro">
+      <h2 class="section-heading">Instituições Participantes</h2>
+      <p class="section-desc">Clique em uma instituição para ver os detalhes completos da avaliação.</p>
+      <div class="search-bar-wrap"><input type="text" id="searchInput" class="search-bar" placeholder="🔍  Buscar instituição..." oninput="filterInstitutions(this.value)" /></div>
+    </div>
+    <div class="inst-grid" id="instGrid"></div>
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+      <div class="modal-card" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <div id="modalContent"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECAO COMISSAO -->
+  <section id="section-comissao" class="content-section">
+    <div class="section-intro">
+      <h2 class="section-heading">Comissão Organizadora</h2>
+      <p class="section-desc">Câmara Técnica de Articulação e Divulgação — organizadora da 20ª Caminhada do ECA.</p>
+    </div>
+    <div class="comissao-highlight">
+      <div class="highlight-card highlight-coord"><div class="highlight-role">📌 Coordenadora</div><div class="highlight-name">SAMILE SANTOS DA CRUZ SOUZA</div><div class="highlight-ct">Conselho Tutelar II — Barroquinha</div></div>
+      <div class="highlight-card highlight-sec1"><div class="highlight-role">📝 Secretário</div><div class="highlight-name">FÁBIO BARRETO PEREIRA</div><div class="highlight-ct">Conselho Tutelar XIII — Narandiba</div></div>
+      <div class="highlight-card highlight-sec2"><div class="highlight-role">📝 Secretária</div><div class="highlight-name">ROSANA JESUS DA SILVA RIBEIRO</div><div class="highlight-ct">Conselho Tutelar X — Federação</div></div>
+    </div>
+    <h3 class="section-subheading" style="margin-top:2.5rem">Todos os Membros da Comissão</h3>
+    <div class="comissao-grid" id="comissaoGrid"></div>
+  </section>
+
+  <!-- SECAO DEVOLUTIVA -->
+  <section id="section-devolutiva" class="content-section">
+    <div class="section-intro">
+      <h2 class="section-heading">Prestação de Contas</h2>
+      <p class="section-desc">Devolutiva oficial da Câmara Técnica de Articulação e Divulgação — 10 de agosto de 2026.</p>
+    </div>
+    <div class="devolutiva-card">
+      <div class="dev-header">
+        <div class="dev-stamp">Documento Oficial</div>
+        <h3>Devolutiva — 20ª Caminhada do ECA 2026</h3>
+        <p>Salvador, 10 de agosto de 2026 · Câmara Técnica de Articulação e Divulgação</p>
+      </div>
+      <div class="dev-section">
+        <h4>💰 Recurso em Espécie — R$ 1.000,00</h4>
+        <div class="finance-breakdown">
+          <div class="finance-item"><div class="finance-icon">🚐</div><div class="finance-info"><strong>Aluguel de Vans</strong><span>Transporte das instituições</span></div><div class="finance-val">R$ 300,00</div></div>
+          <div class="finance-item"><div class="finance-icon">📸</div><div class="finance-info"><strong>Serviços de Mídia</strong><span>Cobertura fotográfica e divulgação</span></div><div class="finance-val">R$ 100,00</div></div>
+          <div class="finance-item"><div class="finance-icon">🎨</div><div class="finance-info"><strong>Materiais Diversos</strong><span>Emborrachados, tintas, bolas, crachás e impressos</span></div><div class="finance-val">R$ 314,00</div></div>
+          <div class="finance-item finance-saldo"><div class="finance-icon">✅</div><div class="finance-info"><strong>Saldo Restante</strong><span>Reinvestido em crachás e coletes para equipe de mídia</span></div><div class="finance-val finance-val--green">R$ 286,00</div></div>
+        </div>
+      </div>
+      <div class="dev-section">
+        <h4>📦 Recursos da SPMJ — Materiais Recebidos</h4>
+        <p class="dev-note">Materiais remanescentes serão sorteados em assembleia e destinados às ações da Semana da Criança.</p>
+        <div class="dev-materials-list">
+          <div class="dev-mat"><span>💧</span> 19 caixas de água mineral</div>
+          <div class="dev-mat"><span>🥪</span> 200 kits de lanche — validade até 11/2026</div>
+          <div class="dev-mat"><span>🎧</span> 150 protetores auriculares</div>
+          <div class="dev-mat"><span>👕</span> 07 camisas dos parceiros — sorteadas aos colegiados</div>
+          <div class="dev-mat"><span>🍭</span> 05 pacotes de pirulitos</div>
+          <div class="dev-mat"><span>📿</span> 400 pulseiras de identificação</div>
+          <div class="dev-mat"><span>🖼️</span> 09 banners (1 para comissão + sorteados)</div>
+          <div class="dev-mat"><span>🎌</span> 03 faixas — sorteadas aos colegiados</div>
+        </div>
+      </div>
+      <div class="dev-footer">
+        <p>A Comissão agradece o apoio e a parceria de todos que contribuíram para a realização da 20ª Caminhada do ECA.</p>
+        <div class="signatures">
+          <div class="sig"><div class="sig-line"></div><span>Fábio Barreto Pereira</span><small>Secretário</small></div>
+          <div class="sig"><div class="sig-line"></div><span>Samile Santos da Cruz Souza</span><small>Coordenadora</small></div>
+          <div class="sig"><div class="sig-line"></div><span>Rosana Jesus da Silva Ribeiro</span><small>Secretária</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECAO FEEDBACK -->
+  <section id="section-feedback" class="content-section">
+    <div class="section-intro">
+      <h2 class="section-heading">Avaliações & Sugestões</h2>
+      <p class="section-desc">O que as instituições disseram sobre a 20ª Caminhada do ECA.</p>
+    </div>
+    <div class="feedback-columns">
+      <div class="feedback-col"><h3 class="feedback-col-title positive-title">✨ Pontos Positivos</h3><div class="feedback-list" id="positivos"></div></div>
+      <div class="feedback-col"><h3 class="feedback-col-title improve-title">🔧 Sugestões de Melhoria</h3><div class="feedback-list" id="melhorias"></div></div>
+    </div>
+  </section>
+
+
+  <!-- SECAO CONSELHEIROS -->
+  <section id="section-conselheiros" class="content-section">
+    <div class="section-intro">
+      <h2 class="section-heading">Voz dos Conselheiros</h2>
+      <p class="section-desc">Espaço dedicado às avaliações e sugestões dos Conselheiros Tutelares de Salvador sobre a organização da 20ª Caminhada do ECA.</p>
+    </div>
+
+    <!-- STATS CONSELHEIROS -->
+    <div class="cons-stats-row">
+      <div class="cons-stat-card cons-stat--blue">
+        <div class="cons-stat-icon">🏛️</div>
+        <div class="cons-stat-val">24</div>
+        <div class="cons-stat-lbl">Conselhos Representados</div>
+      </div>
+      <div class="cons-stat-card cons-stat--green">
+        <div class="cons-stat-icon">⭐</div>
+        <div class="cons-stat-val">4.8</div>
+        <div class="cons-stat-lbl">Avaliação Média</div>
+      </div>
+      <div class="cons-stat-card cons-stat--orange">
+        <div class="cons-stat-icon">💡</div>
+        <div class="cons-stat-val">18</div>
+        <div class="cons-stat-lbl">Sugestões Registradas</div>
+      </div>
+      <div class="cons-stat-card cons-stat--purple">
+        <div class="cons-stat-icon">✅</div>
+        <div class="cons-stat-val">100%</div>
+        <div class="cons-stat-lbl">Participariam em 2027</div>
+      </div>
+    </div>
+
+    <!-- FILTROS -->
+    <div class="cons-filter-row">
+      <button class="cons-filter-btn active" onclick="filterConselheiros('todos', this)">Todos</button>
+      <button class="cons-filter-btn" onclick="filterConselheiros('positivo', this)">✨ Positivos</button>
+      <button class="cons-filter-btn" onclick="filterConselheiros('sugestao', this)">🔧 Sugestões</button>
+      <button class="cons-filter-btn" onclick="filterConselheiros('logistica', this)">🚌 Logística</button>
+      <button class="cons-filter-btn" onclick="filterConselheiros('organizacao', this)">📋 Organização</button>
+    </div>
+
+    <!-- CARDS CONSELHEIROS -->
+    <div class="cons-grid" id="consGrid"></div>
+
+    <!-- FORM NOVA AVALIACAO -->
+    <div class="cons-form-wrap">
+      <div class="cons-form-header">
+        <h3>📝 Registrar Nova Avaliação</h3>
+        <p>Conselheiros: utilize este espaço para registrar sua avaliação e sugestões sobre a 20ª Caminhada do ECA.</p>
+      </div>
+      <form class="cons-form" id="consForm" onsubmit="submitConselheiro(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nome do Conselheiro(a) *</label>
+            <input type="text" class="form-input" id="consNome" placeholder="Seu nome completo" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Conselho Tutelar *</label>
+            <select class="form-input" id="consConselho" required>
+              <option value="">Selecione...</option>
+              <option>CT I — Roma</option>
+              <option>CT II — Barroquinha</option>
+              <option>CT III — Vila Laura</option>
+              <option>CT IV — Liberdade</option>
+              <option>CT V — Itapoã</option>
+              <option>CT VI — Pernambués</option>
+              <option>CT VII — Castelo Branco</option>
+              <option>CT VIII — Cajazeiras</option>
+              <option>CT IX — Periperi</option>
+              <option>CT X — Federação</option>
+              <option>CT XI — Boca do Rio</option>
+              <option>CT XII — São Caetano</option>
+              <option>CT XIII — Narandiba</option>
+              <option>CT XIV — Ilhas</option>
+              <option>CT XV — Barra</option>
+              <option>CT XVI — Ipitanga</option>
+              <option>CT XVII — Pituba</option>
+              <option>CT XVIII — Valéria</option>
+              <option>CT XIX — Nordeste de Amaralina</option>
+              <option>CT XX — Subúrbio</option>
+              <option>CT XXI — Águas Claras</option>
+              <option>CT XXII — Cabula</option>
+              <option>CT XXIII — Jardim das Margaridas/CEASA</option>
+              <option>CT XXIV — Brotas</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Avaliação Geral *</label>
+            <div class="star-rating" id="starRating">
+              <span class="star" onclick="setRating(1)">★</span>
+              <span class="star" onclick="setRating(2)">★</span>
+              <span class="star" onclick="setRating(3)">★</span>
+              <span class="star" onclick="setRating(4)">★</span>
+              <span class="star" onclick="setRating(5)">★</span>
+            </div>
+            <input type="hidden" id="consRating" value="0" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Categoria</label>
+            <select class="form-input" id="consCategoria">
+              <option value="positivo">✨ Ponto Positivo</option>
+              <option value="sugestao">🔧 Sugestão de Melhoria</option>
+              <option value="logistica">🚌 Logística</option>
+              <option value="organizacao">📋 Organização</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group form-group--full">
+          <label class="form-label">Avaliação / Comentário *</label>
+          <textarea class="form-input form-textarea" id="consComentario" placeholder="Descreva sua experiência, pontos positivos e sugestões de melhoria para a próxima edição..." required></textarea>
+        </div>
+        <div class="form-group form-group--full">
+          <label class="form-label">Sugestão para a 21ª Caminhada do ECA</label>
+          <textarea class="form-input form-textarea" id="consSugestao" placeholder="Alguma ideia ou sugestão específica para a próxima edição?"></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="form-submit-btn">📨 Enviar Avaliação</button>
+        </div>
+      </form>
+      <div class="form-success" id="formSuccess" style="display:none">
+        <div class="success-icon">🎉</div>
+        <h4>Avaliação registrada com sucesso!</h4>
+        <p>Obrigado pela sua contribuição para a melhoria das próximas edições.</p>
+        <button onclick="resetForm()">Registrar outra avaliação</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+<script src="app.js"></script>
+</body>
+</html>

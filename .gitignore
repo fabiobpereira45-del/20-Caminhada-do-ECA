@@ -1,0 +1,5 @@
+test_schema.py
+create_tables.py
+.tempmediaStorage
+.ds_store
+*.log
