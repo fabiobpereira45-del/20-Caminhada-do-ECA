@@ -206,16 +206,20 @@ function showSection(id) {
   if (section) section.classList.add("active");
   if (nav) nav.classList.add("active");
   // close sidebar on mobile
-  if (window.innerWidth <= 700) {
+  if (window.innerWidth <= 768) {
     const sb = document.getElementById("sidebar");
+    const bd = document.getElementById("sidebarBackdrop");
     if (sb) sb.classList.remove("open");
+    if (bd) bd.classList.remove("open");
   }
 }
 window.showSection = showSection;
 
 function toggleSidebar() {
   const sb = document.getElementById("sidebar");
+  const bd = document.getElementById("sidebarBackdrop");
   if (sb) sb.classList.toggle("open");
+  if (bd) bd.classList.toggle("open");
 }
 window.toggleSidebar = toggleSidebar;
 
