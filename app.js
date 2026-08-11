@@ -18,11 +18,11 @@ const institutions = [
   {
     nome: "Colégio Estadual Conselheiro Vicente Pacheco de Oliveira",
     participantes: 55,
-    primeira_vez: "Sim",
+    primeira_vez: "Não",
     apresentacao: "Sim",
     lanche: "Sim",
     agua: "Sim",
-    protetor: "Sim , ambos",
+    protetor: "Sim , apenas protetor solar",
     veiculo: "Sim",
     recepcao: "Satisfatório",
     proxima: "Sim",
@@ -33,11 +33,11 @@ const institutions = [
   {
     nome: "Escola Professor Bernardino Moreira",
     participantes: 50,
-    primeira_vez: "Sim",
-    apresentacao: "Sim",
+    primeira_vez: "Não",
+    apresentacao: "Não",
     lanche: "Sim",
     agua: "Sim",
-    protetor: "Sim , ambos",
+    protetor: "Sim , apenas material informativo.",
     veiculo: "Sim",
     recepcao: "Satisfatório",
     proxima: "Sim",
@@ -48,7 +48,7 @@ const institutions = [
   {
     nome: "Escola Municipal Helena Magalhães",
     participantes: 55,
-    primeira_vez: "Sim",
+    primeira_vez: "Não",
     apresentacao: "Sim",
     lanche: "Sim",
     agua: "Sim",
@@ -63,13 +63,13 @@ const institutions = [
   {
     nome: "Escola Criança Esperança de Santo Inácio",
     participantes: 40,
-    primeira_vez: "Sim",
+    primeira_vez: "Não",
     apresentacao: "Sim",
     lanche: "Sim",
     agua: "Sim",
     protetor: "Sim , ambos",
-    veiculo: "Sim",
-    recepcao: "Satisfatório",
+    veiculo: "Não",
+    recepcao: "Regular",
     proxima: "Sim",
     positivo: "As músicas, a banda de fanfarra e a segurança durante o percurso",
     melhoria: "A saída do ônibus das comunidades; a nossa saiu tarde às 08:30.",
@@ -79,10 +79,10 @@ const institutions = [
     nome: "Escola Municipal Cosme de Farias",
     participantes: 40,
     primeira_vez: "Sim",
-    apresentacao: "Sim",
+    apresentacao: "Não",
     lanche: "Sim",
     agua: "Sim",
-    protetor: "Sim , ambos",
+    protetor: "Sim , apenas material informativo.",
     veiculo: "Sim",
     recepcao: "Satisfatório",
     proxima: "Sim",
@@ -93,7 +93,7 @@ const institutions = [
   {
     nome: "Escola Passos do Saber LTDA",
     participantes: 67,
-    primeira_vez: "Sim",
+    primeira_vez: "Não",
     apresentacao: "Sim",
     lanche: "Sim",
     agua: "Sim",
@@ -109,11 +109,11 @@ const institutions = [
     nome: "Escola Municipal Esperança de Viver",
     participantes: 27,
     primeira_vez: "Sim",
-    apresentacao: "Sim",
+    apresentacao: "Não",
     lanche: "Sim",
     agua: "Sim",
-    protetor: "Sim , ambos",
-    veiculo: "Sim",
+    protetor: "Não recebi nenhum dos itens",
+    veiculo: "Tive dificuldade",
     recepcao: "Satisfatório",
     proxima: "Sim",
     positivo: "As informações sobre o ECA durante o percurso e a atenção dos conselheiros",
@@ -124,7 +124,7 @@ const institutions = [
     nome: "Creche Vila Verde",
     participantes: 45,
     primeira_vez: "Sim",
-    apresentacao: "Sim",
+    apresentacao: "Não",
     lanche: "Sim",
     agua: "Sim",
     protetor: "Sim , ambos",
@@ -153,7 +153,7 @@ const institutions = [
   {
     nome: "Escola Municipal CSU de Pernambués",
     participantes: 49,
-    primeira_vez: "Não",
+    primeira_vez: "Sim",
     apresentacao: "Sim",
     lanche: "Sim",
     agua: "Sim",
@@ -167,7 +167,7 @@ const institutions = [
   }
 ];
 
-const comissao = [
+const comissaoPadrao = [
   { nome: "JOSELINA REIS OLIVEIRA SILVA", conselho: "CONSELHO TUTELAR I", regiao: "Roma", funcao: "Membro" },
   { nome: "SAMILE SANTOS DA CRUZ SOUZA", conselho: "CONSELHO TUTELAR II", regiao: "Barroquinha", funcao: "Coordenadora" },
   { nome: "MEIRE BATISTA DE OLIVEIRA", conselho: "CONSELHO TUTELAR III", regiao: "Vila Laura", funcao: "Membro" },
@@ -193,6 +193,15 @@ const comissao = [
   { nome: "SILVIA DA PAZ JESUS", conselho: "CONSELHO TUTELAR XXIII", regiao: "Jardim das Margaridas/CEASA", funcao: "Membro" },
   { nome: "SORAIA DO NASCIMENTO VEIGA", conselho: "CONSELHO TUTELAR XXIV", regiao: "Brotas", funcao: "Membro" }
 ];
+
+function getComissaoData() {
+  const local = localStorage.getItem("comissao_organizadora");
+  return local ? JSON.parse(local) : comissaoPadrao;
+}
+
+function saveComissaoData(data) {
+  localStorage.setItem("comissao_organizadora", JSON.stringify(data));
+}
 
 // ========= INIT — see full DOMContentLoaded below =========
 
@@ -327,12 +336,50 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal()
 // ========= COMISSAO =========
 function renderComissao() {
   const grid = document.getElementById("comissaoGrid");
-  comissao.forEach(m => {
-    const initials = m.nome.split(" ").slice(0,2).map(w => w[0]).join("");
+  if (!grid) return;
+  grid.innerHTML = "";
+
+  const list = getComissaoData();
+  const adminMode = isAdminLoggedIn();
+
+  // Atualizar destaques (Coordenadora e Secretários)
+  const coord = list.find(m => m.funcao === "Coordenadora") || list[1] || list[0];
+  const sec1  = list.find(m => m.funcao === "Secretário") || list[12];
+  const sec2  = list.find(m => m.funcao === "Secretária") || list[9];
+
+  const highlightContainer = document.querySelector(".comissao-highlight");
+  if (highlightContainer) {
+    highlightContainer.innerHTML = `
+      <div class="highlight-card highlight-coord"><div class="highlight-role">📌 Coordenadora</div><div class="highlight-name">${coord ? coord.nome : 'SAMILE SANTOS DA CRUZ SOUZA'}</div><div class="highlight-ct">${coord ? coord.conselho + ' — ' + coord.regiao : 'Conselho Tutelar II — Barroquinha'}</div></div>
+      <div class="highlight-card highlight-sec1"><div class="highlight-role">📝 Secretário</div><div class="highlight-name">${sec1 ? sec1.nome : 'FÁBIO BARRETO PEREIRA'}</div><div class="highlight-ct">${sec1 ? sec1.conselho + ' — ' + sec1.regiao : 'Conselho Tutelar XIII — Narandiba'}</div></div>
+      <div class="highlight-card highlight-sec2"><div class="highlight-role">📝 Secretária</div><div class="highlight-name">${sec2 ? sec2.nome : 'ROSANA JESUS DA SILVA RIBEIRO'}</div><div class="highlight-ct">${sec2 ? sec2.conselho + ' — ' + sec2.regiao : 'Conselho Tutelar X — Federação'}</div></div>
+    `;
+  }
+
+  // Adicionar botão de Adicionar Integrante para Administrador
+  const sectionIntro = document.querySelector("#section-comissao .section-intro");
+  let adminBar = document.getElementById("comissaoAdminBar");
+  if (adminMode) {
+    if (!adminBar && sectionIntro) {
+      adminBar = document.createElement("div");
+      adminBar.id = "comissaoAdminBar";
+      adminBar.style.marginTop = "12px";
+      sectionIntro.appendChild(adminBar);
+    }
+    if (adminBar) {
+      adminBar.innerHTML = `<button class="admin-btn admin-btn-edit" style="padding:8px 16px;font-size:13px" onclick="openAddComissaoModal()">➕ Adicionar Integrante à Comissão</button>`;
+    }
+  } else {
+    if (adminBar) adminBar.remove();
+  }
+
+  list.forEach((m, idx) => {
+    const initials = m.nome ? m.nome.split(" ").filter(w => w.length > 0).slice(0,2).map(w => w[0]).join("") : "CT";
     let roleClass = "role-member";
     let roleLabel = "Membro";
     if (m.funcao === "Coordenadora") { roleClass = "role-coord"; roleLabel = "Coordenadora"; }
     if (m.funcao === "Secretário" || m.funcao === "Secretária") { roleClass = "role-sec"; roleLabel = m.funcao; }
+
     const card = document.createElement("div");
     card.className = "comissao-card";
     card.innerHTML = `
@@ -342,10 +389,83 @@ function renderComissao() {
         <div class="comissao-ct">${m.conselho} — ${m.regiao}</div>
         <span class="comissao-role-badge ${roleClass}">${roleLabel}</span>
       </div>
+      ${adminMode ? `
+        <div class="admin-actions-bar" style="margin-top:6px;width:100%">
+          <button class="admin-btn admin-btn-edit" onclick="openEditComissaoModal(${idx})">✏️ Editar</button>
+          <button class="admin-btn admin-btn-delete" onclick="deleteComissaoMember(${idx})">🗑️ Excluir</button>
+        </div>
+      ` : ''}
     `;
     grid.appendChild(card);
   });
 }
+
+function openEditComissaoModal(idx) {
+  const list = getComissaoData();
+  const m = list[idx];
+  if (!m) return;
+
+  document.getElementById("editComissaoIdx").value = idx;
+  const titleEl = document.getElementById("comissaoModalTitle");
+  if (titleEl) titleEl.textContent = "Editar Integrante da Comissão";
+  document.getElementById("editComissaoNome").value = m.nome;
+  document.getElementById("editComissaoConselho").value = m.conselho;
+  document.getElementById("editComissaoRegiao").value = m.regiao;
+  document.getElementById("editComissaoFuncao").value = m.funcao || "Membro";
+
+  document.getElementById("comissaoEditModal").classList.add("open");
+}
+
+function openAddComissaoModal() {
+  document.getElementById("editComissaoIdx").value = -1;
+  const titleEl = document.getElementById("comissaoModalTitle");
+  if (titleEl) titleEl.textContent = "Adicionar Novo Integrante";
+  document.getElementById("editComissaoNome").value = "";
+  document.getElementById("editComissaoConselho").value = "CONSELHO TUTELAR ";
+  document.getElementById("editComissaoRegiao").value = "";
+  document.getElementById("editComissaoFuncao").value = "Membro";
+
+  document.getElementById("comissaoEditModal").classList.add("open");
+}
+
+function closeComissaoEditModal() {
+  document.getElementById("comissaoEditModal").classList.remove("open");
+}
+
+function submitComissaoEdit(e) {
+  e.preventDefault();
+  const idx = parseInt(document.getElementById("editComissaoIdx").value);
+  const nome = document.getElementById("editComissaoNome").value.trim();
+  const conselho = document.getElementById("editComissaoConselho").value.trim();
+  const regiao = document.getElementById("editComissaoRegiao").value.trim();
+  const funcao = document.getElementById("editComissaoFuncao").value;
+
+  const list = getComissaoData();
+
+  if (idx >= 0 && idx < list.length) {
+    list[idx] = { nome, conselho, regiao, funcao };
+  } else {
+    list.push({ nome, conselho, regiao, funcao });
+  }
+
+  saveComissaoData(list);
+  closeComissaoEditModal();
+  renderComissao();
+}
+
+function deleteComissaoMember(idx) {
+  if (!confirm("Tem certeza que deseja remover este integrante da comissão?")) return;
+  const list = getComissaoData();
+  list.splice(idx, 1);
+  saveComissaoData(list);
+  renderComissao();
+}
+
+window.openEditComissaoModal = openEditComissaoModal;
+window.openAddComissaoModal = openAddComissaoModal;
+window.closeComissaoEditModal = closeComissaoEditModal;
+window.submitComissaoEdit = submitComissaoEdit;
+window.deleteComissaoMember = deleteComissaoMember;
 
 // ========= FEEDBACK =========
 function renderFeedback() {
@@ -399,6 +519,209 @@ if (window.supabase) {
   } catch (e) {
     console.warn("Supabase init warning:", e);
   }
+}
+
+// ========= ADMIN / MODERATION MODE =========
+function isAdminLoggedIn() {
+  return sessionStorage.getItem("eca_admin_logged") === "true";
+}
+
+function updateAdminUI() {
+  const isLogged = isAdminLoggedIn();
+  const statusChip = document.getElementById("adminStatusChip");
+  const sidebarBtn = document.getElementById("adminSidebarBtn");
+  if (statusChip) statusChip.style.display = isLogged ? "flex" : "none";
+  if (sidebarBtn) {
+    sidebarBtn.innerHTML = isLogged ? "🛡️ Moderador Ativo (Sair)" : "🔐 Modo Moderador";
+    sidebarBtn.onclick = isLogged ? logoutAdmin : toggleAdminLoginModal;
+  }
+}
+
+function toggleAdminLoginModal() {
+  if (isAdminLoggedIn()) {
+    logoutAdmin();
+    return;
+  }
+  const modal = document.getElementById("adminLoginModal");
+  if (modal) modal.classList.toggle("open");
+}
+
+function closeAdminLoginModal() {
+  const modal = document.getElementById("adminLoginModal");
+  if (modal) modal.classList.remove("open");
+}
+
+function submitAdminLogin(e) {
+  e.preventDefault();
+  const pass = document.getElementById("adminPassInput")?.value.trim();
+  if (pass) {
+    sessionStorage.setItem("eca_admin_logged", "true");
+    closeAdminLoginModal();
+    updateAdminUI();
+    renderConsGrid(currentFilter);
+    renderComissao();
+  }
+}
+
+function logoutAdmin() {
+  sessionStorage.removeItem("eca_admin_logged");
+  updateAdminUI();
+  renderConsGrid(currentFilter);
+  renderComissao();
+}
+
+// ---- CRUD & Moderation Functions ----
+async function toggleHideEvaluation(avId) {
+  const lista = loadAvaliacoesLocal();
+  const item = lista.find(a => a.id === avId);
+  if (item) {
+    item.oculto = !item.oculto;
+    saveAvaliacoesLocal(lista);
+    if (supabaseClient) {
+      try {
+        await supabaseClient.from('avaliacoes_conselheiros').update({ oculto: item.oculto }).eq('id', avId);
+      } catch (e) { console.log("Supabase update error:", e); }
+    }
+    renderConsGrid(currentFilter);
+  }
+}
+
+async function deleteEvaluation(avId) {
+  if (!confirm("Tem certeza que deseja excluir esta avaliação permanentemente?")) return;
+  let lista = loadAvaliacoesLocal();
+  lista = lista.filter(a => a.id !== avId);
+  saveAvaliacoesLocal(lista);
+  localStorage.removeItem("replies_" + avId);
+
+  if (supabaseClient) {
+    try {
+      await supabaseClient.from('avaliacoes_conselheiros').delete().eq('id', avId);
+    } catch (e) { console.log("Supabase delete error:", e); }
+  }
+  renderConsGrid(currentFilter);
+}
+
+function openEditEvaluationModal(avId) {
+  const lista = loadAvaliacoesLocal();
+  const item = lista.find(a => a.id === avId);
+  if (!item) return;
+
+  document.getElementById("editItemId").value = avId;
+  document.getElementById("editItemType").value = "avaliacao";
+  const titleEl = document.getElementById("adminEditTitle");
+  if (titleEl) titleEl.textContent = "Editar Avaliação";
+  document.getElementById("editNomeInput").value = item.nome;
+  document.getElementById("editConselhoInput").value = item.conselho;
+  document.getElementById("editComentarioInput").value = item.comentario;
+  document.getElementById("editSugestaoGroup").style.display = "block";
+  document.getElementById("editSugestaoInput").value = item.sugestao || "";
+
+  document.getElementById("adminEditModal").classList.add("open");
+}
+
+function closeAdminEditModal() {
+  document.getElementById("adminEditModal").classList.remove("open");
+}
+
+async function submitAdminEdit(e) {
+  e.preventDefault();
+  const id = document.getElementById("editItemId").value;
+  const type = document.getElementById("editItemType").value;
+  const nome = document.getElementById("editNomeInput").value.trim();
+  const conselho = document.getElementById("editConselhoInput").value.trim();
+  const comentario = document.getElementById("editComentarioInput").value.trim();
+  const sugestao = document.getElementById("editSugestaoInput").value.trim();
+
+  if (type === "avaliacao") {
+    const lista = loadAvaliacoesLocal();
+    const item = lista.find(a => a.id === id);
+    if (item) {
+      item.nome = nome;
+      item.conselho = conselho;
+      item.comentario = comentario;
+      item.sugestao = sugestao;
+      saveAvaliacoesLocal(lista);
+
+      if (supabaseClient) {
+        try {
+          await supabaseClient.from('avaliacoes_conselheiros').update({
+            nome, conselho, comentario, sugestao
+          }).eq('id', id);
+        } catch (err) { console.log("Supabase edit error:", err); }
+      }
+    }
+  } else if (type === "reply") {
+    const [avId, replyIdx] = id.split("___");
+    const replies = loadRepliesLocal(avId);
+    const idx = parseInt(replyIdx);
+    if (replies[idx]) {
+      replies[idx].nome = nome;
+      replies[idx].conselho = conselho;
+      replies[idx].texto = comentario;
+      localStorage.setItem("replies_" + avId, JSON.stringify(replies));
+
+      if (supabaseClient) {
+        try {
+          await supabaseClient.from('comentarios_conselheiros').update({
+            nome, conselho, texto: comentario
+          }).match({ avaliacao_id: avId, texto: comentario });
+        } catch (err) { console.log("Supabase edit reply error:", err); }
+      }
+    }
+  }
+
+  closeAdminEditModal();
+  renderConsGrid(currentFilter);
+}
+
+async function deleteReply(avId, idx) {
+  if (!confirm("Tem certeza que deseja excluir este comentário?")) return;
+  const replies = loadRepliesLocal(avId);
+  const target = replies[idx];
+  replies.splice(idx, 1);
+  localStorage.setItem("replies_" + avId, JSON.stringify(replies));
+
+  if (supabaseClient && target) {
+    try {
+      await supabaseClient.from('comentarios_conselheiros').delete().match({
+        avaliacao_id: avId, texto: target.texto
+      });
+    } catch (e) { console.log("Supabase delete reply error:", e); }
+  }
+  renderConsGrid(currentFilter);
+}
+
+async function toggleHideReply(avId, idx) {
+  const replies = loadRepliesLocal(avId);
+  if (replies[idx]) {
+    replies[idx].oculto = !replies[idx].oculto;
+    localStorage.setItem("replies_" + avId, JSON.stringify(replies));
+    if (supabaseClient) {
+      try {
+        await supabaseClient.from('comentarios_conselheiros').update({ oculto: replies[idx].oculto }).match({
+          avaliacao_id: avId, texto: replies[idx].texto
+        });
+      } catch (e) { console.log("Supabase hide reply error:", e); }
+    }
+    renderConsGrid(currentFilter);
+  }
+}
+
+function openEditReplyModal(avId, idx) {
+  const replies = loadRepliesLocal(avId);
+  const item = replies[idx];
+  if (!item) return;
+
+  document.getElementById("editItemId").value = avId + "___" + idx;
+  document.getElementById("editItemType").value = "reply";
+  const titleEl = document.getElementById("adminEditTitle");
+  if (titleEl) titleEl.textContent = "Editar Comentário";
+  document.getElementById("editNomeInput").value = item.nome;
+  document.getElementById("editConselhoInput").value = item.conselho;
+  document.getElementById("editComentarioInput").value = item.texto;
+  document.getElementById("editSugestaoGroup").style.display = "none";
+
+  document.getElementById("adminEditModal").classList.add("open");
 }
 
 // ========= VOZ DOS CONSELHEIROS =========
@@ -457,6 +780,7 @@ async function syncFromSupabase() {
           conselho: c.conselho,
           initials: c.initials,
           texto: c.texto,
+          oculto: c.oculto || false,
           data: new Date(c.created_at).toLocaleDateString("pt-BR")
         });
       });
@@ -476,7 +800,11 @@ function renderConsGrid(filter) {
   const grid = document.getElementById("consGrid");
   if (!grid) return;
 
-  const todas = loadAvaliacoesLocal();
+  const adminMode = isAdminLoggedIn();
+  let todas = loadAvaliacoesLocal();
+  if (!adminMode) {
+    todas = todas.filter(a => !a.oculto);
+  }
   const filtradas = currentFilter === "todos"
     ? todas
     : todas.filter(a => a.categoria === currentFilter);
@@ -496,7 +824,10 @@ function renderConsGrid(filter) {
   filtradas.forEach((av) => {
     const avId = av.id || ("av_" + av.nome.replace(/\s/g, "") + "_" + av.data);
     av.id = avId;
-    const replies = loadRepliesLocal(avId);
+    let replies = loadRepliesLocal(avId);
+    if (!adminMode) {
+      replies = replies.filter(r => !r.oculto);
+    }
 
     const starsHtml = Array.from({length: 5}, (_, i) =>
       `<span class="cons-card-star${i >= av.rating ? " off" : ""}">★</span>`
@@ -511,23 +842,32 @@ function renderConsGrid(filter) {
     const cat = catLabels[av.categoria] || {cls: "cat-positivo", txt: av.categoria};
     const initials = av.initials || av.nome.split(" ").slice(0,2).map(w => w[0].toUpperCase()).join("");
 
-    const repliesHtml = replies.map(r => `
-      <div class="reply-item">
+    const repliesHtml = replies.map((r, rIdx) => `
+      <div class="reply-item ${r.oculto ? 'card-oculto' : ''}">
         <div class="reply-avatar">${r.initials || "?"}</div>
         <div class="reply-body">
+          ${r.oculto ? '<span class="badge-oculto">👁️ Oculto pelo Moderador</span>' : ''}
           <div class="reply-meta"><strong>${r.nome}</strong> · <span>${r.conselho}</span> · <span class="reply-date">${r.data}</span></div>
           <div class="reply-text">${r.texto}</div>
+          ${adminMode ? `
+            <div class="admin-actions-bar">
+              <button class="admin-btn admin-btn-hide" onclick="toggleHideReply('${avId}', ${rIdx})">${r.oculto ? '👁️ Exibir' : '👁️ Ocultar'}</button>
+              <button class="admin-btn admin-btn-edit" onclick="openEditReplyModal('${avId}', ${rIdx})">✏️ Editar</button>
+              <button class="admin-btn admin-btn-delete" onclick="deleteReply('${avId}', ${rIdx})">🗑️ Excluir</button>
+            </div>
+          ` : ''}
         </div>
       </div>
     `).join("");
 
     const card = document.createElement("div");
-    card.className = "cons-card";
+    card.className = "cons-card" + (av.oculto ? " card-oculto" : "");
     card.setAttribute("data-cat", av.categoria);
     card.setAttribute("data-id", avId);
     card.style.setProperty("--cons-accent", av.accent || "linear-gradient(90deg,#1e88e5,#42a5f5)");
 
     card.innerHTML = `
+      ${av.oculto ? '<span class="badge-oculto">👁️ Oculto pelo Moderador</span>' : ''}
       <div class="cons-card-header">
         <div class="cons-card-avatar" style="background:${av.accent || 'var(--blue)'}">${initials}</div>
         <div class="cons-card-info">
@@ -549,6 +889,13 @@ function renderConsGrid(filter) {
           💬 ${replies.length > 0 ? replies.length + " comentário" + (replies.length > 1 ? "s" : "") : "Comentar"}
         </button>
       </div>
+      ${adminMode ? `
+        <div class="admin-actions-bar">
+          <button class="admin-btn admin-btn-hide" onclick="toggleHideEvaluation('${avId}')">${av.oculto ? '👁️ Exibir' : '👁️ Ocultar'}</button>
+          <button class="admin-btn admin-btn-edit" onclick="openEditEvaluationModal('${avId}')">✏️ Editar</button>
+          <button class="admin-btn admin-btn-delete" onclick="deleteEvaluation('${avId}')">🗑️ Excluir</button>
+        </div>
+      ` : ''}
       <div class="replies-section" id="replies-${avId}" style="display:none">
         <div class="replies-list" id="replies-list-${avId}">${repliesHtml}</div>
         <div class="reply-form">
@@ -609,6 +956,7 @@ async function submitReply(avId) {
     conselho: ct || "Conselho não informado",
     initials: nome.split(" ").slice(0,2).map(w => w[0].toUpperCase()).join(""),
     texto: txt,
+    oculto: false,
     data: new Date().toLocaleDateString("pt-BR") + " " + new Date().toLocaleTimeString("pt-BR", {hour:"2-digit",minute:"2-digit"})
   };
 
@@ -622,7 +970,8 @@ async function submitReply(avId) {
         nome: reply.nome,
         conselho: reply.conselho,
         initials: reply.initials,
-        texto: reply.texto
+        texto: reply.texto,
+        oculto: false
       }]);
     } catch (e) {
       console.log("Supabase insert reply info:", e);
@@ -644,12 +993,9 @@ async function submitReply(avId) {
     setTimeout(() => div.classList.add("reply-item--visible"), 20);
   }
 
-  const nomeEl = document.getElementById("reply-nome-" + avId);
-  const ctEl   = document.getElementById("reply-ct-" + avId);
-  const txtEl  = document.getElementById("reply-text-" + avId);
-  if (nomeEl) nomeEl.value = "";
-  if (ctEl)   ctEl.value   = "";
-  if (txtEl)  txtEl.value  = "";
+  renderConsGrid(currentFilter);
+  const section = document.getElementById("replies-" + avId);
+  if (section) section.style.display = "block";
 
   const card = document.querySelector(`[data-id="${avId}"]`);
   if (card) {
@@ -683,8 +1029,21 @@ window.submitConselheiro = submitConselheiro;
 window.resetForm = resetForm;
 window.toggleReplies = toggleReplies;
 window.submitReply = submitReply;
+window.toggleAdminLoginModal = toggleAdminLoginModal;
+window.closeAdminLoginModal = closeAdminLoginModal;
+window.submitAdminLogin = submitAdminLogin;
+window.logoutAdmin = logoutAdmin;
+window.toggleHideEvaluation = toggleHideEvaluation;
+window.deleteEvaluation = deleteEvaluation;
+window.openEditEvaluationModal = openEditEvaluationModal;
+window.closeAdminEditModal = closeAdminEditModal;
+window.submitAdminEdit = submitAdminEdit;
+window.deleteReply = deleteReply;
+window.toggleHideReply = toggleHideReply;
+window.openEditReplyModal = openEditReplyModal;
 
 function initApp() {
+  updateAdminUI();
   renderInstitutions(institutions);
   renderComissao();
   renderFeedback();
@@ -740,6 +1099,7 @@ async function submitConselheiro(e) {
     sugestao,
     initials: nome.split(" ").slice(0,2).map(w => w[0].toUpperCase()).join(""),
     accent: accents[categoria] || accents.positivo,
+    oculto: false,
     data: new Date().toLocaleDateString("pt-BR")
   };
 
@@ -759,7 +1119,8 @@ async function submitConselheiro(e) {
         comentario: nova.comentario,
         sugestao: nova.sugestao,
         initials: nova.initials,
-        accent: nova.accent
+        accent: nova.accent,
+        oculto: false
       }]);
     } catch (e) {
       console.log("Supabase insert evaluation info:", e);
