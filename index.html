@@ -451,21 +451,21 @@
       <div class="modal-header">
         <div class="modal-header-icon">✏️</div>
         <h2 id="adminEditTitle">Editar Avaliação</h2>
-        <div class="modal-header-sub">Edite os dados do comentário/avaliação selecionada.</div>
+        <div class="modal-header-sub" id="adminEditSub">Edite os dados selecionados.</div>
       </div>
       <form class="admin-edit-form" onsubmit="submitAdminEdit(event)">
         <input type="hidden" id="editItemId" />
         <input type="hidden" id="editItemType" value="avaliacao" />
         <div class="form-group">
-          <label class="form-label">Nome do Conselheiro *</label>
+          <label class="form-label" id="editNomeLabel">Nome do Conselheiro *</label>
           <input type="text" class="form-input" id="editNomeInput" required />
         </div>
         <div class="form-group" style="margin-top:12px">
-          <label class="form-label">Conselho Tutelar *</label>
+          <label class="form-label" id="editConselhoLabel">Conselho Tutelar *</label>
           <input type="text" class="form-input" id="editConselhoInput" required />
         </div>
         <div class="form-group" style="margin-top:12px">
-          <label class="form-label">Comentário / Avaliação *</label>
+          <label class="form-label" id="editComentarioLabel">Comentário / Avaliação *</label>
           <textarea class="form-input form-textarea" id="editComentarioInput" required></textarea>
         </div>
         <div class="form-group" id="editSugestaoGroup" style="margin-top:12px">
@@ -474,42 +474,6 @@
         </div>
         <div class="form-actions" style="margin-top:16px">
           <button type="submit" class="form-submit-btn">💾 Salvar Alterações</button>
-        </div>
-      </form>
-    </div>
-  <div class="modal-overlay" id="comissaoEditModal" onclick="closeComissaoEditModal()">
-    <div class="modal-card admin-modal-card" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeComissaoEditModal()">✕</button>
-      <div class="modal-header">
-        <div class="modal-header-icon">👥</div>
-        <h2 id="comissaoModalTitle">Editar Integrante da Comissão</h2>
-        <div class="modal-header-sub">Altere o nome, conselho, região ou função do integrante.</div>
-      </div>
-      <form class="admin-edit-form" onsubmit="submitComissaoEdit(event)">
-        <input type="hidden" id="editComissaoIdx" value="-1" />
-        <div class="form-group">
-          <label class="form-label">Nome Completo *</label>
-          <input type="text" class="form-input" id="editComissaoNome" required />
-        </div>
-        <div class="form-group" style="margin-top:12px">
-          <label class="form-label">Conselho Tutelar *</label>
-          <input type="text" class="form-input" id="editComissaoConselho" required placeholder="Ex: CONSELHO TUTELAR XIII" />
-        </div>
-        <div class="form-group" style="margin-top:12px">
-          <label class="form-label">Região / Bairro *</label>
-          <input type="text" class="form-input" id="editComissaoRegiao" required placeholder="Ex: Narandiba" />
-        </div>
-        <div class="form-group" style="margin-top:12px">
-          <label class="form-label">Função *</label>
-          <select class="form-input reply-select" id="editComissaoFuncao" required>
-            <option value="Membro">Membro</option>
-            <option value="Coordenadora">Coordenadora</option>
-            <option value="Secretário">Secretário</option>
-            <option value="Secretária">Secretária</option>
-          </select>
-        </div>
-        <div class="form-actions" style="margin-top:16px">
-          <button type="submit" class="form-submit-btn">💾 Salvar Integrante</button>
         </div>
       </form>
     </div>

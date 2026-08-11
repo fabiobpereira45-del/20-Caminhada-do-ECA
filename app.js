@@ -7,7 +7,7 @@ const institutions = [
     apresentacao: "Sim",
     lanche: "Sim",
     agua: "Sim",
-    protetor: "Sim , ambos",
+    protetor: "Sim, ambos",
     veiculo: "Sim",
     recepcao: "Satisfatório",
     proxima: "Sim",
@@ -18,11 +18,11 @@ const institutions = [
   {
     nome: "Colégio Estadual Conselheiro Vicente Pacheco de Oliveira",
     participantes: 55,
-    primeira_vez: "Não",
+    primeira_vez: "Sim",
     apresentacao: "Sim",
     lanche: "Sim",
     agua: "Sim",
-    protetor: "Sim , apenas protetor solar",
+    protetor: "Sim, ambos",
     veiculo: "Sim",
     recepcao: "Satisfatório",
     proxima: "Sim",
@@ -33,11 +33,11 @@ const institutions = [
   {
     nome: "Escola Professor Bernardino Moreira",
     participantes: 50,
-    primeira_vez: "Não",
-    apresentacao: "Não",
+    primeira_vez: "Sim",
+    apresentacao: "Sim",
     lanche: "Sim",
     agua: "Sim",
-    protetor: "Sim , apenas material informativo.",
+    protetor: "Sim, ambos",
     veiculo: "Sim",
     recepcao: "Satisfatório",
     proxima: "Sim",
@@ -48,11 +48,11 @@ const institutions = [
   {
     nome: "Escola Municipal Helena Magalhães",
     participantes: 55,
-    primeira_vez: "Não",
+    primeira_vez: "Sim",
     apresentacao: "Sim",
     lanche: "Sim",
     agua: "Sim",
-    protetor: "Sim , ambos",
+    protetor: "Sim, apenas material informativo",
     veiculo: "Sim",
     recepcao: "Satisfatório",
     proxima: "Sim",
@@ -63,13 +63,13 @@ const institutions = [
   {
     nome: "Escola Criança Esperança de Santo Inácio",
     participantes: 40,
-    primeira_vez: "Não",
+    primeira_vez: "Sim",
     apresentacao: "Sim",
     lanche: "Sim",
     agua: "Sim",
-    protetor: "Sim , ambos",
-    veiculo: "Não",
-    recepcao: "Regular",
+    protetor: "Sim, ambos",
+    veiculo: "Tive dificuldade",
+    recepcao: "Satisfatório",
     proxima: "Sim",
     positivo: "As músicas, a banda de fanfarra e a segurança durante o percurso",
     melhoria: "A saída do ônibus das comunidades; a nossa saiu tarde às 08:30.",
@@ -79,10 +79,10 @@ const institutions = [
     nome: "Escola Municipal Cosme de Farias",
     participantes: 40,
     primeira_vez: "Sim",
-    apresentacao: "Não",
+    apresentacao: "Sim",
     lanche: "Sim",
     agua: "Sim",
-    protetor: "Sim , apenas material informativo.",
+    protetor: "Sim, apenas protetor solar",
     veiculo: "Sim",
     recepcao: "Satisfatório",
     proxima: "Sim",
@@ -97,8 +97,8 @@ const institutions = [
     apresentacao: "Sim",
     lanche: "Sim",
     agua: "Sim",
-    protetor: "Sim , ambos",
-    veiculo: "Sim",
+    protetor: "Sim, ambos",
+    veiculo: "Não",
     recepcao: "Satisfatório",
     proxima: "Sim",
     positivo: "Atenção de todos os conselheiros e interação com os educandos",
@@ -109,11 +109,11 @@ const institutions = [
     nome: "Escola Municipal Esperança de Viver",
     participantes: 27,
     primeira_vez: "Sim",
-    apresentacao: "Não",
+    apresentacao: "Sim",
     lanche: "Sim",
     agua: "Sim",
-    protetor: "Não recebi nenhum dos itens",
-    veiculo: "Tive dificuldade",
+    protetor: "Sim, ambos",
+    veiculo: "Sim",
     recepcao: "Satisfatório",
     proxima: "Sim",
     positivo: "As informações sobre o ECA durante o percurso e a atenção dos conselheiros",
@@ -124,10 +124,10 @@ const institutions = [
     nome: "Creche Vila Verde",
     participantes: 45,
     primeira_vez: "Sim",
-    apresentacao: "Não",
+    apresentacao: "Sim",
     lanche: "Sim",
     agua: "Sim",
-    protetor: "Sim , ambos",
+    protetor: "Sim, apenas material informativo",
     veiculo: "Sim",
     recepcao: "Satisfatório",
     proxima: "Sim",
@@ -142,7 +142,7 @@ const institutions = [
     apresentacao: "Sim",
     lanche: "Sim",
     agua: "Sim",
-    protetor: "Sim , ambos",
+    protetor: "Sim, ambos",
     veiculo: "Sim",
     recepcao: "Satisfatório",
     proxima: "Sim",
@@ -153,11 +153,11 @@ const institutions = [
   {
     nome: "Escola Municipal CSU de Pernambués",
     participantes: 49,
-    primeira_vez: "Sim",
+    primeira_vez: "Não",
     apresentacao: "Sim",
     lanche: "Sim",
     agua: "Sim",
-    protetor: "Sim , ambos",
+    protetor: "Não recebi nenhum dos itens",
     veiculo: "Sim",
     recepcao: "Satisfatório",
     proxima: "Sim",
@@ -167,7 +167,7 @@ const institutions = [
   }
 ];
 
-const comissaoPadrao = [
+const comissao = [
   { nome: "JOSELINA REIS OLIVEIRA SILVA", conselho: "CONSELHO TUTELAR I", regiao: "Roma", funcao: "Membro" },
   { nome: "SAMILE SANTOS DA CRUZ SOUZA", conselho: "CONSELHO TUTELAR II", regiao: "Barroquinha", funcao: "Coordenadora" },
   { nome: "MEIRE BATISTA DE OLIVEIRA", conselho: "CONSELHO TUTELAR III", regiao: "Vila Laura", funcao: "Membro" },
@@ -193,15 +193,6 @@ const comissaoPadrao = [
   { nome: "SILVIA DA PAZ JESUS", conselho: "CONSELHO TUTELAR XXIII", regiao: "Jardim das Margaridas/CEASA", funcao: "Membro" },
   { nome: "SORAIA DO NASCIMENTO VEIGA", conselho: "CONSELHO TUTELAR XXIV", regiao: "Brotas", funcao: "Membro" }
 ];
-
-function getComissaoData() {
-  const local = localStorage.getItem("comissao_organizadora");
-  return local ? JSON.parse(local) : comissaoPadrao;
-}
-
-function saveComissaoData(data) {
-  localStorage.setItem("comissao_organizadora", JSON.stringify(data));
-}
 
 // ========= INIT — see full DOMContentLoaded below =========
 
@@ -334,52 +325,27 @@ function closeModal() {
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
 
 // ========= COMISSAO =========
+function loadComissaoLocal() {
+  const stored = localStorage.getItem("comissao_data");
+  return stored ? JSON.parse(stored) : comissao;
+}
+
+function saveComissaoLocal(data) {
+  localStorage.setItem("comissao_data", JSON.stringify(data));
+}
+
 function renderComissao() {
   const grid = document.getElementById("comissaoGrid");
   if (!grid) return;
   grid.innerHTML = "";
-
-  const list = getComissaoData();
   const adminMode = isAdminLoggedIn();
-
-  // Atualizar destaques (Coordenadora e Secretários)
-  const coord = list.find(m => m.funcao === "Coordenadora") || list[1] || list[0];
-  const sec1  = list.find(m => m.funcao === "Secretário") || list[12];
-  const sec2  = list.find(m => m.funcao === "Secretária") || list[9];
-
-  const highlightContainer = document.querySelector(".comissao-highlight");
-  if (highlightContainer) {
-    highlightContainer.innerHTML = `
-      <div class="highlight-card highlight-coord"><div class="highlight-role">📌 Coordenadora</div><div class="highlight-name">${coord ? coord.nome : 'SAMILE SANTOS DA CRUZ SOUZA'}</div><div class="highlight-ct">${coord ? coord.conselho + ' — ' + coord.regiao : 'Conselho Tutelar II — Barroquinha'}</div></div>
-      <div class="highlight-card highlight-sec1"><div class="highlight-role">📝 Secretário</div><div class="highlight-name">${sec1 ? sec1.nome : 'FÁBIO BARRETO PEREIRA'}</div><div class="highlight-ct">${sec1 ? sec1.conselho + ' — ' + sec1.regiao : 'Conselho Tutelar XIII — Narandiba'}</div></div>
-      <div class="highlight-card highlight-sec2"><div class="highlight-role">📝 Secretária</div><div class="highlight-name">${sec2 ? sec2.nome : 'ROSANA JESUS DA SILVA RIBEIRO'}</div><div class="highlight-ct">${sec2 ? sec2.conselho + ' — ' + sec2.regiao : 'Conselho Tutelar X — Federação'}</div></div>
-    `;
-  }
-
-  // Adicionar botão de Adicionar Integrante para Administrador
-  const sectionIntro = document.querySelector("#section-comissao .section-intro");
-  let adminBar = document.getElementById("comissaoAdminBar");
-  if (adminMode) {
-    if (!adminBar && sectionIntro) {
-      adminBar = document.createElement("div");
-      adminBar.id = "comissaoAdminBar";
-      adminBar.style.marginTop = "12px";
-      sectionIntro.appendChild(adminBar);
-    }
-    if (adminBar) {
-      adminBar.innerHTML = `<button class="admin-btn admin-btn-edit" style="padding:8px 16px;font-size:13px" onclick="openAddComissaoModal()">➕ Adicionar Integrante à Comissão</button>`;
-    }
-  } else {
-    if (adminBar) adminBar.remove();
-  }
-
-  list.forEach((m, idx) => {
-    const initials = m.nome ? m.nome.split(" ").filter(w => w.length > 0).slice(0,2).map(w => w[0]).join("") : "CT";
+  const data = loadComissaoLocal();
+  data.forEach((m, idx) => {
+    const initials = m.nome.split(" ").slice(0,2).map(w => w[0]).join("");
     let roleClass = "role-member";
     let roleLabel = "Membro";
     if (m.funcao === "Coordenadora") { roleClass = "role-coord"; roleLabel = "Coordenadora"; }
     if (m.funcao === "Secretário" || m.funcao === "Secretária") { roleClass = "role-sec"; roleLabel = m.funcao; }
-
     const card = document.createElement("div");
     card.className = "comissao-card";
     card.innerHTML = `
@@ -388,84 +354,44 @@ function renderComissao() {
         <div class="comissao-name">${m.nome}</div>
         <div class="comissao-ct">${m.conselho} — ${m.regiao}</div>
         <span class="comissao-role-badge ${roleClass}">${roleLabel}</span>
-      </div>
-      ${adminMode ? `
-        <div class="admin-actions-bar" style="margin-top:6px;width:100%">
+        ${adminMode ? `
+        <div class="admin-actions-bar" style="margin-top:8px">
           <button class="admin-btn admin-btn-edit" onclick="openEditComissaoModal(${idx})">✏️ Editar</button>
-          <button class="admin-btn admin-btn-delete" onclick="deleteComissaoMember(${idx})">🗑️ Excluir</button>
-        </div>
-      ` : ''}
+        </div>` : ""}
+      </div>
     `;
     grid.appendChild(card);
   });
 }
 
 function openEditComissaoModal(idx) {
-  const list = getComissaoData();
-  const m = list[idx];
+  const data = loadComissaoLocal();
+  const m = data[idx];
   if (!m) return;
+  document.getElementById("editItemId").value = "comissao___" + idx;
+  document.getElementById("editItemType").value = "comissao";
+  
+  const titleEl = document.getElementById("adminEditTitle");
+  if (titleEl) titleEl.textContent = "Editar Membro da Comissão";
+  const subEl = document.getElementById("adminEditSub");
+  if (subEl) subEl.textContent = "Edite os dados do integrante da Comissão Organizadora.";
+  
+  const labelNome = document.getElementById("editNomeLabel");
+  if (labelNome) labelNome.textContent = "Nome do Membro *";
+  const labelConselho = document.getElementById("editConselhoLabel");
+  if (labelConselho) labelConselho.textContent = "Conselho — Região *";
+  const labelComentario = document.getElementById("editComentarioLabel");
+  if (labelComentario) labelComentario.textContent = "Função (ex: Membro, Coordenadora) *";
+  
+  const comentarioField = document.getElementById("editComentarioInput");
+  if (comentarioField) comentarioField.rows = 1;
 
-  document.getElementById("editComissaoIdx").value = idx;
-  const titleEl = document.getElementById("comissaoModalTitle");
-  if (titleEl) titleEl.textContent = "Editar Integrante da Comissão";
-  document.getElementById("editComissaoNome").value = m.nome;
-  document.getElementById("editComissaoConselho").value = m.conselho;
-  document.getElementById("editComissaoRegiao").value = m.regiao;
-  document.getElementById("editComissaoFuncao").value = m.funcao || "Membro";
-
-  document.getElementById("comissaoEditModal").classList.add("open");
+  document.getElementById("editNomeInput").value = m.nome;
+  document.getElementById("editConselhoInput").value = m.conselho + " — " + m.regiao;
+  document.getElementById("editComentarioInput").value = m.funcao;
+  document.getElementById("editSugestaoGroup").style.display = "none";
+  document.getElementById("adminEditModal").classList.add("open");
 }
-
-function openAddComissaoModal() {
-  document.getElementById("editComissaoIdx").value = -1;
-  const titleEl = document.getElementById("comissaoModalTitle");
-  if (titleEl) titleEl.textContent = "Adicionar Novo Integrante";
-  document.getElementById("editComissaoNome").value = "";
-  document.getElementById("editComissaoConselho").value = "CONSELHO TUTELAR ";
-  document.getElementById("editComissaoRegiao").value = "";
-  document.getElementById("editComissaoFuncao").value = "Membro";
-
-  document.getElementById("comissaoEditModal").classList.add("open");
-}
-
-function closeComissaoEditModal() {
-  document.getElementById("comissaoEditModal").classList.remove("open");
-}
-
-function submitComissaoEdit(e) {
-  e.preventDefault();
-  const idx = parseInt(document.getElementById("editComissaoIdx").value);
-  const nome = document.getElementById("editComissaoNome").value.trim();
-  const conselho = document.getElementById("editComissaoConselho").value.trim();
-  const regiao = document.getElementById("editComissaoRegiao").value.trim();
-  const funcao = document.getElementById("editComissaoFuncao").value;
-
-  const list = getComissaoData();
-
-  if (idx >= 0 && idx < list.length) {
-    list[idx] = { nome, conselho, regiao, funcao };
-  } else {
-    list.push({ nome, conselho, regiao, funcao });
-  }
-
-  saveComissaoData(list);
-  closeComissaoEditModal();
-  renderComissao();
-}
-
-function deleteComissaoMember(idx) {
-  if (!confirm("Tem certeza que deseja remover este integrante da comissão?")) return;
-  const list = getComissaoData();
-  list.splice(idx, 1);
-  saveComissaoData(list);
-  renderComissao();
-}
-
-window.openEditComissaoModal = openEditComissaoModal;
-window.openAddComissaoModal = openAddComissaoModal;
-window.closeComissaoEditModal = closeComissaoEditModal;
-window.submitComissaoEdit = submitComissaoEdit;
-window.deleteComissaoMember = deleteComissaoMember;
 
 // ========= FEEDBACK =========
 function renderFeedback() {
@@ -608,8 +534,22 @@ function openEditEvaluationModal(avId) {
 
   document.getElementById("editItemId").value = avId;
   document.getElementById("editItemType").value = "avaliacao";
+  
   const titleEl = document.getElementById("adminEditTitle");
   if (titleEl) titleEl.textContent = "Editar Avaliação";
+  const subEl = document.getElementById("adminEditSub");
+  if (subEl) subEl.textContent = "Edite os dados da avaliação selecionada.";
+  
+  const labelNome = document.getElementById("editNomeLabel");
+  if (labelNome) labelNome.textContent = "Nome do Conselheiro *";
+  const labelConselho = document.getElementById("editConselhoLabel");
+  if (labelConselho) labelConselho.textContent = "Conselho Tutelar *";
+  const labelComentario = document.getElementById("editComentarioLabel");
+  if (labelComentario) labelComentario.textContent = "Comentário / Avaliação *";
+  
+  const comentarioField = document.getElementById("editComentarioInput");
+  if (comentarioField) comentarioField.rows = 3;
+
   document.getElementById("editNomeInput").value = item.nome;
   document.getElementById("editConselhoInput").value = item.conselho;
   document.getElementById("editComentarioInput").value = item.comentario;
@@ -668,6 +608,22 @@ async function submitAdminEdit(e) {
         } catch (err) { console.log("Supabase edit reply error:", err); }
       }
     }
+  } else if (type === "comissao") {
+    const [, idxStr] = id.split("___");
+    const idx = parseInt(idxStr);
+    const data = loadComissaoLocal();
+    if (data[idx]) {
+      // Conselho field format: "CONSELHO TUTELAR X — Região" or just "Novo nome"
+      const partes = conselho.split("—").map(s => s.trim());
+      data[idx].nome = nome;
+      data[idx].conselho = partes[0] || conselho;
+      data[idx].regiao = partes[1] || data[idx].regiao;
+      data[idx].funcao = comentario || data[idx].funcao;
+      saveComissaoLocal(data);
+    }
+    closeAdminEditModal();
+    renderComissao();
+    return;
   }
 
   closeAdminEditModal();
@@ -714,8 +670,22 @@ function openEditReplyModal(avId, idx) {
 
   document.getElementById("editItemId").value = avId + "___" + idx;
   document.getElementById("editItemType").value = "reply";
+  
   const titleEl = document.getElementById("adminEditTitle");
   if (titleEl) titleEl.textContent = "Editar Comentário";
+  const subEl = document.getElementById("adminEditSub");
+  if (subEl) subEl.textContent = "Edite as informações do comentário selecionado.";
+  
+  const labelNome = document.getElementById("editNomeLabel");
+  if (labelNome) labelNome.textContent = "Seu Nome *";
+  const labelConselho = document.getElementById("editConselhoLabel");
+  if (labelConselho) labelConselho.textContent = "Conselho Tutelar *";
+  const labelComentario = document.getElementById("editComentarioLabel");
+  if (labelComentario) labelComentario.textContent = "Comentário *";
+  
+  const comentarioField = document.getElementById("editComentarioInput");
+  if (comentarioField) comentarioField.rows = 3;
+
   document.getElementById("editNomeInput").value = item.nome;
   document.getElementById("editConselhoInput").value = item.conselho;
   document.getElementById("editComentarioInput").value = item.texto;
@@ -1041,6 +1011,7 @@ window.submitAdminEdit = submitAdminEdit;
 window.deleteReply = deleteReply;
 window.toggleHideReply = toggleHideReply;
 window.openEditReplyModal = openEditReplyModal;
+window.openEditComissaoModal = openEditComissaoModal;
 
 function initApp() {
   updateAdminUI();
