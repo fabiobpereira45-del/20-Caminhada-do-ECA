@@ -108,7 +108,7 @@ const institutions = [
   {
     nome: "Escola Municipal Esperança de Viver",
     participantes: 27,
-    primeira_vez: "Não",
+    primeira_vez: "Sim",
     apresentacao: "Sim",
     lanche: "Sim",
     agua: "Sim",
@@ -123,7 +123,7 @@ const institutions = [
   {
     nome: "Creche Vila Verde",
     participantes: 45,
-    primeira_vez: "Não",
+    primeira_vez: "Sim",
     apresentacao: "Não",
     lanche: "Sim",
     agua: "Sim",
