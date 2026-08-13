@@ -170,7 +170,7 @@ const institutions = [
 const comissao = [
   { nome: "JOSELINA REIS OLIVEIRA SILVA", conselho: "CONSELHO TUTELAR I", regiao: "Roma", funcao: "Membro" },
   { nome: "SAMILE SANTOS DA CRUZ SOUZA", conselho: "CONSELHO TUTELAR II", regiao: "Barroquinha", funcao: "Coordenadora" },
-  { nome: "EDNEIDE MARIA DOS SANTOS ALMEIDA", conselho: "CONSELHO TUTELAR II", regiao: "Vila Laura", funcao: "Membro" },
+  { nome: "EDNEIDE MARIA DOS SANTOS ALMEIDA", conselho: "CONSELHO TUTELAR III", regiao: "Vila Laura", funcao: "Membro" },
   { nome: "JOSENIRA MEIRELES DOS SANTOS", conselho: "CONSELHO TUTELAR IV", regiao: "Liberdade", funcao: "Membro" },
   { nome: "NOEMI BRITO DA SILVA", conselho: "CONSELHO TUTELAR V", regiao: "Itapoã", funcao: "Membro" },
   { nome: "LUCIENE PEREIRA DOS SANTOS", conselho: "CONSELHO TUTELAR VI", regiao: "Pernambués", funcao: "Membro" },
@@ -183,14 +183,14 @@ const comissao = [
   { nome: "FÁBIO BARRETO PEREIRA", conselho: "CONSELHO TUTELAR XIII", regiao: "Narandiba", funcao: "Secretário" },
   { nome: "VIVIANE SILVA PEIXOTO", conselho: "CONSELHO TUTELAR XIV", regiao: "Ilhas", funcao: "Membro" },
   { nome: "VANIA DOS SANTOS SOARES", conselho: "CONSELHO TUTELAR XV", regiao: "Barra", funcao: "Membro" },
-  { nome: "CÍNTIA MARA CONCEIÇÃO DE JESUS", conselho: "CONSELHO TUTELAR XVI", regiao: "Ipitanga", funcao: "Membro" },
+  { nome: "ANA PAULA SANTOS", conselho: "CONSELHO TUTELAR XVI", regiao: "Ipitanga", funcao: "Membro" },
   { nome: "KELI CRISTIANE VIANA HIRSCH", conselho: "CONSELHO TUTELAR XVII", regiao: "Pituba", funcao: "Membro" },
-  { nome: "ANA PAULA VIANA DE SOUZA", conselho: "CONSELHO TUTELAR XVIII", regiao: "Valéria", funcao: "Membro" },
+  { nome: "ANA PAULA SOUZA", conselho: "CONSELHO TUTELAR XVIII", regiao: "Valéria", funcao: "Membro" },
   { nome: "ANDRESSA COSTA DOS SANTOS", conselho: "CONSELHO TUTELAR XIX", regiao: "Nordeste de Amaralina", funcao: "Membro" },
   { nome: "ANDRÉ SANTOS SANTANA", conselho: "CONSELHO TUTELAR XX", regiao: "Subúrbio", funcao: "Membro" },
   { nome: "EDSON BARCELOS DOS SANTOS", conselho: "CONSELHO TUTELAR XXI", regiao: "Águas Claras", funcao: "Membro" },
   { nome: "ROSANA MEIRELES BARBOSA", conselho: "CONSELHO TUTELAR XXII", regiao: "Cabula", funcao: "Membro" },
-  { nome: "SILVIA DA PAZ JESUS", conselho: "CONSELHO TUTELAR XXIII", regiao: "Jardim das Margaridas/CEASA", funcao: "Membro" },
+  { nome: "SÔNIA HOLÍSTICA", conselho: "CONSELHO TUTELAR XXIII", regiao: "Jardim das Margaridas/CEASA", funcao: "Membro" },
   { nome: "SORAIA DO NASCIMENTO VEIGA", conselho: "CONSELHO TUTELAR XXIV", regiao: "Brotas", funcao: "Membro" }
 ];
 
@@ -326,12 +326,12 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal()
 
 // ========= COMISSAO =========
 function loadComissaoLocal() {
-  const stored = localStorage.getItem("comissao_data_v2");
+  const stored = localStorage.getItem("comissao_data_v3");
   return stored ? JSON.parse(stored) : comissao;
 }
 
 function saveComissaoLocal(data) {
-  localStorage.setItem("comissao_data_v2", JSON.stringify(data));
+  localStorage.setItem("comissao_data_v3", JSON.stringify(data));
 }
 
 function renderComissao() {
