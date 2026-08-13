@@ -595,6 +595,7 @@ async function submitAdminEdit(e) {
     const replies = loadRepliesLocal(avId);
     const idx = parseInt(replyIdx);
     if (replies[idx]) {
+      const oldTexto = replies[idx].texto;
       replies[idx].nome = nome;
       replies[idx].conselho = conselho;
       replies[idx].texto = comentario;
@@ -604,7 +605,7 @@ async function submitAdminEdit(e) {
         try {
           await supabaseClient.from('comentarios_conselheiros').update({
             nome, conselho, texto: comentario
-          }).match({ avaliacao_id: avId, texto: comentario });
+          }).match({ avaliacao_id: avId, texto: oldTexto });
         } catch (err) { console.log("Supabase edit reply error:", err); }
       }
     }
