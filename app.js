@@ -326,12 +326,12 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal()
 
 // ========= COMISSAO =========
 function loadComissaoLocal() {
-  const stored = localStorage.getItem("comissao_data");
+  const stored = localStorage.getItem("comissao_data_v2");
   return stored ? JSON.parse(stored) : comissao;
 }
 
 function saveComissaoLocal(data) {
-  localStorage.setItem("comissao_data", JSON.stringify(data));
+  localStorage.setItem("comissao_data_v2", JSON.stringify(data));
 }
 
 function renderComissao() {
