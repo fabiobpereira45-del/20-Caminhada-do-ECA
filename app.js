@@ -170,7 +170,7 @@ const institutions = [
 const comissao = [
   { nome: "JOSELINA REIS OLIVEIRA SILVA", conselho: "CONSELHO TUTELAR I", regiao: "Roma", funcao: "Membro" },
   { nome: "SAMILE SANTOS DA CRUZ SOUZA", conselho: "CONSELHO TUTELAR II", regiao: "Barroquinha", funcao: "Coordenadora" },
-  { nome: "MEIRE BATISTA DE OLIVEIRA", conselho: "CONSELHO TUTELAR III", regiao: "Vila Laura", funcao: "Membro" },
+  { nome: "EDNEIDE MARIA DOS SANTOS ALMEIDA", conselho: "CONSELHO TUTELAR II", regiao: "Vila Laura", funcao: "Membro" },
   { nome: "JOSENIRA MEIRELES DOS SANTOS", conselho: "CONSELHO TUTELAR IV", regiao: "Liberdade", funcao: "Membro" },
   { nome: "NOEMI BRITO DA SILVA", conselho: "CONSELHO TUTELAR V", regiao: "Itapoã", funcao: "Membro" },
   { nome: "LUCIENE PEREIRA DOS SANTOS", conselho: "CONSELHO TUTELAR VI", regiao: "Pernambués", funcao: "Membro" },
